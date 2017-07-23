@@ -12,13 +12,15 @@ class AddAccountViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
-    let accountInfo = ["Account" : "user@example.com", "Key" : "abcd efgh ijkl mnop"]
+    let accountInfo = ["Account" : "user@example.com", "Key" : "abcd efgh ijkl mnop", "Issuer" : "Google"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func addAccount(_ sender: UIButton) {
+        
+        CoreDataStack.shared.save(issuer: "Google", name: "alpysbayev.t@gmail.com", secret: "zdun vau7 m4fj fysy 3j5m asii q5qa yag4")
     }
     
 }
@@ -39,7 +41,7 @@ extension AddAccountViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
