@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import OneTimePassword
+import Base32
 
 class ViewController: UIViewController {
 
@@ -15,17 +17,56 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var rightBarItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    var accounts = [Account?]()
+    var accounts = [Account]()
+    
+    var currentTime: Float!
+    var currentProgress: Float!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-        updateProgress()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        setup()
         
+        startProgressAnimation()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        stopProgressAnimation()
+    }
+    
+    func getCurrentTime() -> Float {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "ss"
+        let second = Float(formatter.string(from: Date()))!
+        return second < 30.0 ? second : second - 30.0
+    }
+    
+    func stopProgressAnimation() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
+    }
+    
+    func startProgressAnimation() {
+        currentTime = getCurrentTime()
+        currentProgress = currentTime / 30.0
+        
+        leftBar.setProgress(currentProgress, animated: false)
+        rightBar.setProgress(1.0 - currentProgress, animated: false)
+        
+        tableView.reloadData()
+        perform(#selector(updateProgress), with: nil, afterDelay: 0.0)
+    }
+    
+    func updateProgress() {
+        UIView.animate(withDuration: TimeInterval(exactly: 30.0 - currentTime)!, animations: {
+            self.leftBar.setProgress(1.0, animated: true)
+            self.rightBar.setProgress(0.0, animated: true)
+        }) { (completion) in
+            self.perform(#selector(self.startProgressAnimation), with: nil, afterDelay: TimeInterval(exactly: 30.0 - self.currentTime)!)
+        }
     }
     
     @IBAction func edit(_ sender: UIBarButtonItem) {
@@ -33,29 +74,17 @@ class ViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: tableView.isEditing ? .done : .edit, target: self, action: #selector(edit(_:)))
     }
     
-    func updateProgress() {
-        leftBar.setProgress(0.0, animated: false)
-        rightBar.setProgress(1.0, animated: false)
-            
-        perform(#selector(startUpdating), with: nil, afterDelay: 0.0)
-    }
-    
-    func startUpdating() {
-        perform(#selector(updateProgress), with: 10, afterDelay: 10)
-        
-        UIView.animate(withDuration: 10) {
-            self.leftBar.setProgress(1.0, animated: true)
-            self.rightBar.setProgress(0.0, animated: true)
-        }
-    }
-    
     func setup() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         tableView.tableFooterView = UIView()
-        accounts.append(Account(issuer: "Google", name: "google@google.com", secret: "bzbx vbhg clxt fytm tlgy k6o5 vpr6 pccj"))
-        accounts.append(Account(issuer: "Twitter", name: "maill@mail.ru", secret: "bzbx vbhg clxt fytm tlgy k6o5 vpr6 pccg"))
-        accounts.append(Account(issuer: "Yahoo", name: "hoyaa@yahoo.com", secret: "bzbx vbhg clxt fytm tlgy k6o5 vpr6 pcck"))
+        
+        if let accs = CoreDataStack.shared.getAccounts() {
+            accounts = accs
+            print(accounts)
+        }
+        
+        tableView.reloadData()
     }
     
 }
@@ -69,18 +98,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "authenticatorCell")! as! AuthenticatorTableViewCell
         
-        if let account = accounts[indexPath.row] {
+        if accounts.count >= indexPath.row {
+            let account = accounts[indexPath.row]
             cell.accountLabel.text = account.name!
             cell.account = account
+            cell.numberLabel.text = createToken(account: account)?.currentPassword!
         }
         
+        
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if !(cell as! AuthenticatorTableViewCell).isUpdating {
-            (cell as! AuthenticatorTableViewCell).updateProgress()
-        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -89,9 +115,28 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         return [UITableViewRowAction.init(style: UITableViewRowActionStyle.destructive, title: "Delete", handler: { (action, path) in
-            self.accounts.remove(at: indexPath.row)
+            CoreDataStack.shared.remove(account: self.accounts.remove(at: indexPath.row))
             tableView.reloadData()
         })]
+    }
+    
+    func createToken(account: Account) -> Token? {
+        guard let secretData = MF_Base32Codec.data(fromBase32String: account.secret),
+            !secretData.isEmpty else {
+                print("Invalid secret")
+                return nil
+        }
+        
+        guard let generator = Generator(
+            factor: .timer(period: 30),
+            secret: secretData,
+            algorithm: .sha1,
+            digits: 6) else {
+                print("Invalid generator parameters")
+                return nil
+        }
+        
+        return Token(name: String(describing: account.name!), issuer: account.issuer!, generator: generator)
     }
     
 }
