@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import OneTimePassword
-import Base32
 
 class ViewController: UIViewController {
 
@@ -29,7 +27,6 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         setup()
-        
         startProgressAnimation()
     }
     
@@ -101,10 +98,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         if accounts.count >= indexPath.row {
             let account = accounts[indexPath.row]
             cell.accountLabel.text = account.name!
-            cell.account = account
-            cell.numberLabel.text = createToken(account: account)?.currentPassword!
+            cell.issuerLabel.text = account.issuer!
+            cell.numberLabel.text = TokenGenerator.createToken(account: account)?.currentPassword!.componented()
         }
-        
         
         return cell
     }
@@ -118,25 +114,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             CoreDataStack.shared.remove(account: self.accounts.remove(at: indexPath.row))
             tableView.reloadData()
         })]
-    }
-    
-    func createToken(account: Account) -> Token? {
-        guard let secretData = MF_Base32Codec.data(fromBase32String: account.secret),
-            !secretData.isEmpty else {
-                print("Invalid secret")
-                return nil
-        }
-        
-        guard let generator = Generator(
-            factor: .timer(period: 30),
-            secret: secretData,
-            algorithm: .sha1,
-            digits: 6) else {
-                print("Invalid generator parameters")
-                return nil
-        }
-        
-        return Token(name: String(describing: account.name!), issuer: account.issuer!, generator: generator)
     }
     
 }

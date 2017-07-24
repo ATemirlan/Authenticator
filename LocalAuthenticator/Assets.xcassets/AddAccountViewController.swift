@@ -7,20 +7,38 @@
 //
 
 import UIKit
+import AVFoundation
+import QRCodeReader
 
 class AddAccountViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var fields: [UITextField]!
 
-    let accountInfo = ["Account" : "user@example.com", "Key" : "abcd efgh ijkl mnop", "Issuer" : "Google"]
-    
+    lazy var readerVC: QRCodeReaderViewController = {
+        let builder = QRCodeReaderViewControllerBuilder {
+            $0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObjectTypeQRCode], captureDevicePosition: .back)
+        }
+        
+        return QRCodeReaderViewController(builder: builder)
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func addAccount(_ sender: UIButton) {
-        
-        CoreDataStack.shared.save(issuer: "Google", name: "alpysbayev.t@gmail.com", secret: "zdun vau7 m4fj fysy 3j5m asii q5qa yag4")
+        if let key = fields[2].text, key.characters.count > 0, TokenGenerator.canCreateToken(secretKey: key) {
+            CoreDataStack.shared.save(issuer: fields[0].text, name: fields[1].text, secret: key)
+            Utils.showSuccessAlert(message: "Account added", at: self)
+        } else {
+            Utils.showErrorAlert(message: "Incorrect key", at: self)
+        }
+    }
+    
+    @IBAction func scanAccount(_ sender: UIBarButtonItem) {
+        readerVC.delegate = self
+        readerVC.modalPresentationStyle = .formSheet
+        present(readerVC, animated: true, completion: nil)
     }
     
 }
@@ -34,31 +52,38 @@ extension AddAccountViewController: UITextFieldDelegate {
     
 }
 
-extension AddAccountViewController: UITableViewDataSource, UITableViewDelegate {
+extension AddAccountViewController: QRCodeReaderViewControllerDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
+        reader.stopScanning()
+
+        dismiss(animated: true) {
+            if let url = URL(string: result.value) {
+                let components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+                
+                if let queryItems = components.queryItems {
+                    for item in queryItems {
+                        DispatchQueue.main.async {
+                            switch item.name {
+                            case "secret":
+                                self.fields[2].text = item.value!
+                                break
+                            case "issuer":
+                                self.fields[0].text = item.value!
+                                break
+                            default:
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "addAccountCell") as! AddAccountTableViewCell
-        
-        cell.titleLabel.text = Array(accountInfo.keys)[indexPath.section]
-        cell.textField.placeholder = Array(accountInfo.values)[indexPath.section]
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        return 16.0
+    func readerDidCancel(_ reader: QRCodeReaderViewController) {
+        reader.stopScanning()
+        dismiss(animated: true, completion: nil)
     }
     
 }

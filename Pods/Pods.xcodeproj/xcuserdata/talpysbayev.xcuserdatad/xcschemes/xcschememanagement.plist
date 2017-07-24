@@ -19,15 +19,35 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>QRCodeReader.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RNCryptor.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>068E2059C6CBE8BBD9B97B9F2B9B6F7E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2F2909F90E513FB2F9A36831DC4D132A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3647B7CD5DE9FA85E0FABE2095862C2F</key>
+		<key>52BFD3821C1E9F908D16C6E44FF80E02</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B6A0FDED9447A26030D13E566729772</key>
 		<dict>
 			<key>primary</key>
 			<true/>

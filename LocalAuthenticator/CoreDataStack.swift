@@ -85,7 +85,7 @@ struct CoreDataStack {
         
         account.issuer = issuer
         account.name = name
-        account.secret = secret
+        account.secret = Cipher.encodedString(origin: secret!)
         
         save()
     }
@@ -96,7 +96,7 @@ struct CoreDataStack {
     }
     
     func getAccounts() -> [Account]? {
-        var fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Account")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Account")
         
         do {
             if let result = try context.fetch(fetchRequest) as? [Account] {

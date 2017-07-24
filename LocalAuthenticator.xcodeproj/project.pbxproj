@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		14920FD81F24D94700EEC6C6 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14920FD71F24D94700EEC6C6 /* CoreDataStack.swift */; };
 		74FC01D1E940953DF0149FF9 /* Pods_LocalAuthenticator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC4F51F518DF337D90CB1506 /* Pods_LocalAuthenticator.framework */; };
+		9153DB921F25A46800C811AF /* TokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9153DB911F25A46800C811AF /* TokenGenerator.swift */; };
+		9153DB941F25AC9E00C811AF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9153DB931F25AC9E00C811AF /* Utils.swift */; };
+		91552F2F1F25F4E1009FC52D /* Cipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91552F2E1F25F4E1009FC52D /* Cipher.swift */; };
 		9168B9021F04F0950084E2B9 /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9168B9011F04F0950084E2B9 /* AddAccountViewController.swift */; };
 		9168B9041F04F1B10084E2B9 /* AddAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9168B9031F04F1B10084E2B9 /* AddAccountTableViewCell.swift */; };
 		91FF3C181F0252F70068E29F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF3C171F0252F70068E29F /* AppDelegate.swift */; };
@@ -26,6 +29,9 @@
 		7CEF4701B40CDA3AEAC491CD /* Pods-LocalAuthenticator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalAuthenticator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LocalAuthenticator/Pods-LocalAuthenticator.debug.xcconfig"; sourceTree = "<group>"; };
 		9121066C1F03A2F900309F16 /* Base32.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Base32.framework; path = "../../Library/Developer/Xcode/DerivedData/LocalAuthenticator-godsbfmnvzfbxlafxoserziwobne/Build/Products/Debug-iphonesimulator/Base32/Base32.framework"; sourceTree = "<group>"; };
 		9121066E1F03A2FD00309F16 /* OneTimePassword.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneTimePassword.framework; path = "../../Library/Developer/Xcode/DerivedData/LocalAuthenticator-godsbfmnvzfbxlafxoserziwobne/Build/Products/Debug-iphonesimulator/OneTimePassword/OneTimePassword.framework"; sourceTree = "<group>"; };
+		9153DB911F25A46800C811AF /* TokenGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenGenerator.swift; sourceTree = "<group>"; };
+		9153DB931F25AC9E00C811AF /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		91552F2E1F25F4E1009FC52D /* Cipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cipher.swift; sourceTree = "<group>"; };
 		9168B9011F04F0950084E2B9 /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddAccountViewController.swift; path = Assets.xcassets/AddAccountViewController.swift; sourceTree = "<group>"; };
 		9168B9031F04F1B10084E2B9 /* AddAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountTableViewCell.swift; sourceTree = "<group>"; };
 		91FF3C141F0252F70068E29F /* LocalAuthenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalAuthenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +100,8 @@
 			children = (
 				91FF3C1E1F0252F70068E29F /* LocalAuthenticator.xcdatamodeld */,
 				14920FD71F24D94700EEC6C6 /* CoreDataStack.swift */,
+				9153DB911F25A46800C811AF /* TokenGenerator.swift */,
+				91552F2E1F25F4E1009FC52D /* Cipher.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -101,6 +109,7 @@
 		9168B9081F0502B50084E2B9 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				9153DB931F25AC9E00C811AF /* Utils.swift */,
 				91FF3C171F0252F70068E29F /* AppDelegate.swift */,
 				91FF3C1B1F0252F70068E29F /* Main.storyboard */,
 				91FF3C211F0252F70068E29F /* Assets.xcassets */,
@@ -265,11 +274,14 @@
 			files = (
 				9168B9041F04F1B10084E2B9 /* AddAccountTableViewCell.swift in Sources */,
 				91FF3C201F0252F70068E29F /* LocalAuthenticator.xcdatamodeld in Sources */,
+				91552F2F1F25F4E1009FC52D /* Cipher.swift in Sources */,
+				9153DB941F25AC9E00C811AF /* Utils.swift in Sources */,
 				91FF3C1A1F0252F70068E29F /* ViewController.swift in Sources */,
 				91FF3C2D1F0255490068E29F /* AuthenticatorTableViewCell.swift in Sources */,
 				9168B9021F04F0950084E2B9 /* AddAccountViewController.swift in Sources */,
 				91FF3C181F0252F70068E29F /* AppDelegate.swift in Sources */,
 				14920FD81F24D94700EEC6C6 /* CoreDataStack.swift in Sources */,
+				9153DB921F25A46800C811AF /* TokenGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

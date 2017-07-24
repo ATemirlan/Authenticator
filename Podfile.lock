@@ -2,14 +2,20 @@ PODS:
   - Base32 (1.1.2)
   - OneTimePassword (3.0):
     - Base32 (~> 1.1.2)
+  - QRCodeReader.swift (7.4.3)
+  - RNCryptor (5.0.1)
 
 DEPENDENCIES:
   - OneTimePassword (~> 3.0)
+  - QRCodeReader.swift (~> 7.4.3)
+  - RNCryptor (~> 5.0)
 
 SPEC CHECKSUMS:
   Base32: 163c298644d184e89ca4e00a996bad6bf5166390
   OneTimePassword: 7f116451e8a4b55e385dc0191966798ca3180c9d
+  QRCodeReader.swift: 4a1d46f3057b1b6fc555578b2dc9f2dc99c7ccda
+  RNCryptor: 2e352a488779d1a9184ab629be22a7c5bc84acb5
 
-PODFILE CHECKSUM: 7340d0f24c928d2695a50c69f548e9b54c23b300
+PODFILE CHECKSUM: 3c689caf44efd578d4004718a994f0b88b1ebbc7
 
 COCOAPODS: 1.1.1

@@ -14,8 +14,8 @@ class AuthenticatorTableViewCell: UITableViewCell {
     
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var accountLabel: UILabel!
+    @IBOutlet weak var issuerLabel: UILabel!
     
-    var account: Account?
     var isUpdating: Bool = false
     
     override func awakeFromNib() {
