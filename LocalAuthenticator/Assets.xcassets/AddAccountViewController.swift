@@ -13,6 +13,7 @@ import QRCodeReader
 class AddAccountViewController: UIViewController {
     
     @IBOutlet var fields: [UITextField]!
+    @IBOutlet weak var backItem: UIBarButtonItem!
 
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
@@ -24,6 +25,12 @@ class AddAccountViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    @IBAction func goBack(_ sender: UIBarButtonItem) {
+        navigationController!.popViewController(animated: true)
     }
     
     @IBAction func addAccount(_ sender: UIButton) {
@@ -31,14 +38,35 @@ class AddAccountViewController: UIViewController {
             CoreDataStack.shared.save(issuer: fields[0].text, name: fields[1].text, secret: key)
             Utils.showSuccessAlert(message: "Account added", at: self)
         } else {
-            Utils.showErrorAlert(message: "Incorrect key", at: self)
+            Utils.showErrorAlert(message: fields[2].text!.characters.count > 0 ? "Incorrect key" : "Key must not be empty", at: self)
         }
     }
     
     @IBAction func scanAccount(_ sender: UIBarButtonItem) {
+        if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
+            showReader()
+        } else {
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted: Bool) -> Void in
+                if granted {
+                    self.showReader()
+                }
+            })
+        }
+    }
+    
+    func showReader() {
         readerVC.delegate = self
         readerVC.modalPresentationStyle = .formSheet
+        setupCameraCancelAccessibility()
         present(readerVC, animated: true, completion: nil)
+    }
+    
+    func setupCameraCancelAccessibility() {
+        for v in readerVC.view.subviews[0].subviews {
+            if v is UIButton, (v as! UIButton).titleLabel?.text == "Cancel" {
+                (v as! UIButton).accessibilityLabel = "cancelButton"
+            }
+        }
     }
     
 }

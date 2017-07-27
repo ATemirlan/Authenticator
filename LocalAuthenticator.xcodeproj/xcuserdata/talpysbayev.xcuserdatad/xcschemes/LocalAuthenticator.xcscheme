@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "91ABC7AD1F26EE4D0090CD1A"
+               BuildableName = "LocalAuthenticatorTests.xctest"
+               BlueprintName = "LocalAuthenticatorTests"
+               ReferencedContainer = "container:LocalAuthenticator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9102C1B01F28885800635B6D"
+               BuildableName = "LocalAuthenticatorUITests.xctest"
+               BlueprintName = "LocalAuthenticatorUITests"
+               ReferencedContainer = "container:LocalAuthenticator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

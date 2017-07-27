@@ -34,7 +34,7 @@
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123456" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lfl-d2-YAV">
                                                     <rect key="frame" x="117.5" y="36" width="140.5" height="45.5"/>
-                                                    <accessibility key="accessibilityConfiguration">
+                                                    <accessibility key="accessibilityConfiguration" label="numberLabel">
                                                         <accessibilityTraits key="traits" none="YES"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
@@ -43,12 +43,14 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="account@title.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyB-LX-sIR">
                                                     <rect key="frame" x="127" y="89.5" width="121" height="17"/>
+                                                    <accessibility key="accessibilityConfiguration" label="accountLabel"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Issuer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdj-xE-mae">
                                                     <rect key="frame" x="166" y="11" width="43" height="17"/>
+                                                    <accessibility key="accessibilityConfiguration" label="issuerLabel"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -73,6 +75,9 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="tableView"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="lt8-me-HsB"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="rXf-uN-0yr"/>
@@ -86,11 +91,13 @@
                                         <subviews>
                                             <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-eu-Ofn">
                                                 <rect key="frame" x="0.0" y="0.0" width="187.5" height="2.5"/>
+                                                <accessibility key="accessibilityConfiguration" label="leftBar"/>
                                                 <color key="progressTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <color key="trackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </progressView>
                                             <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="XXL-ap-gpl">
                                                 <rect key="frame" x="187.5" y="0.0" width="187.5" height="2.5"/>
+                                                <accessibility key="accessibilityConfiguration" label="rightBar"/>
                                                 <color key="progressTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="trackTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             </progressView>
@@ -99,6 +106,9 @@
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration" label="progressView">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstItem="3RS-Wt-yY9" firstAttribute="leading" secondItem="nqh-mN-CNI" secondAttribute="leading" id="3Cp-Ei-R4F"/>
                                     <constraint firstAttribute="trailing" secondItem="3RS-Wt-yY9" secondAttribute="trailing" id="8Fb-IK-HDQ"/>
@@ -120,11 +130,17 @@
                     </view>
                     <navigationItem key="navigationItem" title="Authenticator" id="5iH-Ud-fxm">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="pFm-yc-cHq">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="addButton"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <segue destination="PoM-Eb-wDy" kind="show" id="dwi-4K-JEw"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="EEn-bb-UUG">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="EEn-bb-UUG" userLabel="edit">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="editButton"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="edit:" destination="BYZ-38-t0r" id="dCy-3O-8CN"/>
                             </connections>
@@ -156,6 +172,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpk-hx-86T">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="addAccountButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="9ma-DK-clz"/>
                                 </constraints>
@@ -180,9 +197,13 @@
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Issuer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X6q-1o-9I6">
                                                 <rect key="frame" x="0.0" y="28.5" width="343" height="30"/>
+                                                <accessibility key="accessibilityConfiguration" label="issuerField"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="issuerField"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="delegate" destination="PoM-Eb-wDy" id="6Og-2h-Ryg"/>
                                                 </connections>
@@ -212,9 +233,13 @@
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="user@example.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vt6-YX-bNb">
                                                 <rect key="frame" x="0.0" y="28.5" width="343" height="30"/>
+                                                <accessibility key="accessibilityConfiguration" label="accountField"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="accountField"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="delegate" destination="PoM-Eb-wDy" id="zTu-H7-EUn"/>
                                                 </connections>
@@ -244,9 +269,13 @@
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="abcd efgh ijkl mnop" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BOY-xr-GJ5">
                                                 <rect key="frame" x="0.0" y="28.5" width="343" height="30"/>
+                                                <accessibility key="accessibilityConfiguration" label="keyField"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="keyField"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="delegate" destination="PoM-Eb-wDy" id="2Eh-Qd-CK0"/>
                                                 </connections>
@@ -280,13 +309,25 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Account" id="QXP-LQ-hPk">
+                        <barButtonItem key="leftBarButtonItem" title="←" id="4hF-bl-Nhe">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="backButton"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="goBack:" destination="PoM-Eb-wDy" id="VEx-NG-8HG"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="gst-oh-a4Y">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="qrScannerButton"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="scanAccount:" destination="PoM-Eb-wDy" id="WqE-Fb-0iZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backItem" destination="4hF-bl-Nhe" id="nn3-Lj-t2D"/>
                         <outletCollection property="fields" destination="X6q-1o-9I6" collectionClass="NSMutableArray" id="Api-tt-ynR"/>
                         <outletCollection property="fields" destination="Vt6-YX-bNb" collectionClass="NSMutableArray" id="opo-9u-qZ6"/>
                         <outletCollection property="fields" destination="BOY-xr-GJ5" collectionClass="NSMutableArray" id="Iyo-AG-Teg"/>

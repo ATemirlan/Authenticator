@@ -72,8 +72,6 @@ class ViewController: UIViewController {
     }
     
     func setup() {
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        
         tableView.tableFooterView = UIView()
         
         if let accs = CoreDataStack.shared.getAccounts() {

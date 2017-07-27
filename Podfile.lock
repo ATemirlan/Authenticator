@@ -1,21 +1,29 @@
 PODS:
   - Base32 (1.1.2)
+  - KIF (3.5.2):
+    - KIF/Core (= 3.5.2)
+  - KIF/Core (3.5.2)
+  - Nimble (7.0.1)
   - OneTimePassword (3.0):
     - Base32 (~> 1.1.2)
   - QRCodeReader.swift (7.4.3)
   - RNCryptor (5.0.1)
 
 DEPENDENCIES:
+  - KIF
+  - Nimble
   - OneTimePassword (~> 3.0)
   - QRCodeReader.swift (~> 7.4.3)
   - RNCryptor (~> 5.0)
 
 SPEC CHECKSUMS:
   Base32: 163c298644d184e89ca4e00a996bad6bf5166390
+  KIF: f2a6025bb3f11692df675054a134d43a9ec2d7db
+  Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
   OneTimePassword: 7f116451e8a4b55e385dc0191966798ca3180c9d
   QRCodeReader.swift: 4a1d46f3057b1b6fc555578b2dc9f2dc99c7ccda
   RNCryptor: 2e352a488779d1a9184ab629be22a7c5bc84acb5
 
-PODFILE CHECKSUM: 3c689caf44efd578d4004718a994f0b88b1ebbc7
+PODFILE CHECKSUM: d1a05fd1b80ac4635fb51deca15379c6ad8423cf
 
 COCOAPODS: 1.1.1

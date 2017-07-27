@@ -38,6 +38,20 @@ class TokenGenerator {
                 generator: generator(data: secretData(secret: decodedSecret)!)!)
     }
     
+    static func createToken(issuer: String?, name: String?, secret: String) -> Token? {
+        guard let decodedSecret = Cipher.decodedString(encoded: secret) else {
+            return nil
+        }
+        
+        guard canCreateToken(secretKey: decodedSecret) else {
+            return nil
+        }
+        
+        return Token(name: String(describing: name ?? ""),
+                     issuer: issuer ?? "",
+                     generator: generator(data: secretData(secret: decodedSecret)!)!)
+    }
+    
     private static func generator(data: Data) -> Generator? {
         guard let generator = Generator(
             factor: .timer(period: 30),

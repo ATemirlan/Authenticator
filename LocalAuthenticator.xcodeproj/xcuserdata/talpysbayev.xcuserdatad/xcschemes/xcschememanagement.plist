@@ -9,9 +9,36 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>LocalAuthenticatorUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>9102C1A11F28870200635B6D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9102C1B01F28885800635B6D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>910C34411F285BA30056C6C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>91ABC7AD1F26EE4D0090CD1A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>91FF3C131F0252F70068E29F</key>
 		<dict>
 			<key>primary</key>

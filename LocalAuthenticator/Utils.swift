@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import AVFoundation
 
 class Utils {
     
     static func showErrorAlert(message: String, at controller: UIViewController) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         controller.present(alert, animated: true, completion: nil)
     }
     
     static func showSuccessAlert(message: String, at controller: UIViewController) {
-        let alert = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             controller.navigationController?.popViewController(animated: true)

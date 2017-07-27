@@ -9,12 +9,32 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>KIF.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Nimble.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>OneTimePassword.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-LocalAuthenticator.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-LocalAuthenticatorTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-LocalAuthenticatorUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,12 +67,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>69D84D56294C45026D44A7656857C4CF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>898C4182891DCF5CC594EB02B2032D4F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9B6A0FDED9447A26030D13E566729772</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CE666508F8674B420F3F54CC66DE31B0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>DD0543A41A528EAFE58C0CBE0BEC81B0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD7C8BF89FE8053D0A2A2D88BB49CF07</key>
 		<dict>
 			<key>primary</key>
 			<true/>
